@@ -43,7 +43,7 @@ echo -e "${N}###################################################################
 echo -e "${N}NOTE: Still under development"
 echo -e "Scan Date:${Date}"
 
-echo -e "${G}Syntax:${N} ./Lin_Enumeartor.sh -F <Output Folder Name> -f <file name>"
+echo -e "${G}Syntax:${N} ./Lin_Enumeartor.sh   -F <Output Folder Name> -f <file name>"
 
 
 
@@ -54,17 +54,14 @@ echo -e "${G}Arguments/Options: \n [1]-F:Enter the output folder name \n [2]-f:E
 while getopts "F:f:h" option; do
  case "${option}" in
 	  
-	  F) Output=${OPTARG}"-"${Date};;
+          F) Output=${OPTARG}"-"${Date};;
 	  f) Fname=${OPTARG};;
 	  h) Syntax; exit;;
 	  *) Syntax; exit;;
  esac
 done
+
 sleep 2
-
-
-
-
 
 if [[ "$Output" ]]; then
 
@@ -102,7 +99,9 @@ echo -e "\n${G}\nInterfaces: \n${N}\n$(cat /etc/network/interfaces) \n${G}\nFire
 
 
 }
-post_enum_scan
+
+post_enum_scan 2>/dev/null
+
 
 if [[ "$Output" ]]; then
   post_enum_scan >> $format 2>/dev/null
@@ -112,6 +111,9 @@ if [[ "$Fname" ]]; then
 fi
 
 echo -e "\n\n"
+echo -e "${G}Scan Completed!! Happy enumeration!!"
 tmr=$(timer)
-printf ${R}'Elapsed time: %s\n'$(timer $tmr) 
+printf ${B}'Elapsed time: %s\n'$(timer $tmr) 
+echo -e "\n\n"
+
 
